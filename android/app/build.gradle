@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+apply plugin: "com.google.gms.google-services"
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -84,7 +85,16 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        // Enable multidex for faster builds
+        multiDexEnabled true
     }
+    
+    // Enable build cache for faster incremental builds
+    buildFeatures {
+        buildConfig true
+    }
+    
+    // Build performance optimizations are now handled automatically by AGP
     signingConfigs {
         debug {
             storeFile file('debug.keystore')

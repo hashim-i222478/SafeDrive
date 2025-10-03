@@ -1,0 +1,29 @@
+{
+    "project_info": {
+      "project_number": "549587954035",
+      "project_id": "safe-drive-ai-8f062",
+      "storage_bucket": "safe-drive-ai-8f062.firebasestorage.app"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:549587954035:android:363127e6defdaa14dd3d06",
+          "android_client_info": {
+            "package_name": "com.safedrive.ai"
+          }
+        },
+        "oauth_client": [],
+        "api_key": [
+          {
+            "current_key": "AIzaSyC64Dg6wtjaTcdML0Yj0an4qvx4hQ_ZVUs"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": []
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
