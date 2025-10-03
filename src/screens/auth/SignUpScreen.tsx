@@ -9,7 +9,6 @@ import {
   Platform,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '../../theme';
 import { Button, Input, LoadingSpinner } from '../../components/ui';
 import { useAuth } from '../../context/AuthContext';
@@ -137,11 +136,11 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
               style={styles.backButton}
               onPress={() => navigation.goBack()}
             >
-              <Icon name="arrow-back" size={24} color={theme.colors.text.primary} />
+              <Text style={[styles.backIcon, { color: theme.colors.text.primary }]}>←</Text>
             </TouchableOpacity>
             
             <View style={[styles.logoContainer, { backgroundColor: theme.colors.primary[500] }]}>
-              <Icon name="remove-red-eye" size={32} color={theme.colors.text.inverse} />
+              <Text style={[styles.logoIcon, { color: theme.colors.text.inverse }]}>👁</Text>
             </View>
             <Text style={[styles.title, theme.typography.heading.h2, { color: theme.colors.text.primary }]}>
               Join SafeDrive
@@ -235,7 +234,7 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
                   acceptedTerms && { backgroundColor: theme.colors.primary[500] }
                 ]}>
                   {acceptedTerms && (
-                    <Icon name="check" size={16} color={theme.colors.text.inverse} />
+                    <Text style={[styles.checkIcon, { color: theme.colors.text.inverse }]}>✓</Text>
                   )}
                 </View>
                 <Text style={[styles.termsText, theme.typography.body.small, { color: theme.colors.text.secondary }]}>
@@ -277,13 +276,13 @@ export const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
           {/* Security Features */}
           <View style={styles.securityFeatures}>
             <View style={styles.securityFeature}>
-              <Icon name="security" size={20} color={theme.colors.success[500]} />
+              <Text style={[styles.securityIcon, { color: theme.colors.success[500] }]}>🔒</Text>
               <Text style={[styles.securityText, theme.typography.caption.medium, { color: theme.colors.text.secondary }]}>
                 256-bit SSL Encryption
               </Text>
             </View>
             <View style={styles.securityFeature}>
-              <Icon name="verified-user" size={20} color={theme.colors.success[500]} />
+              <Text style={[styles.securityIcon, { color: theme.colors.success[500] }]}>✅</Text>
               <Text style={[styles.securityText, theme.typography.caption.medium, { color: theme.colors.text.secondary }]}>
                 Secure Data Storage
               </Text>
@@ -392,5 +391,22 @@ const styles = StyleSheet.create({
   },
   securityText: {
     marginLeft: 8,
+  },
+  backIcon: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  logoIcon: {
+    fontSize: 32,
+    textAlign: 'center',
+  },
+  checkIcon: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  securityIcon: {
+    fontSize: 20,
+    textAlign: 'center',
   },
 });

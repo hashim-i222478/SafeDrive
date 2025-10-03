@@ -38,7 +38,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (authUser) {
         setUser(authUser);
         
-        // Fetch user profile from Firestore
+        // Fetch user profile from Realtime Database
         try {
           const profile = await getUserProfile(authUser.uid);
           setUserProfile(profile);
@@ -59,9 +59,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const signIn = async (email: string, password: string): Promise<void> => {
     try {
       setLoading(true);
-      // For now with mock Firebase, just simulate authentication
-      await firebaseAuth.signInWithEmailAndPassword();
-      console.log('Mock sign in for:', email);
+      console.log('Attempting to sign in user:', email);
+      await firebaseAuth.signInWithEmailAndPassword(email, password);
+      console.log('User signed in successfully');
     } catch (error) {
       const authError = error as AuthError;
       let errorMessage = 'An error occurred during sign in.';
@@ -86,6 +86,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           errorMessage = authError.message || errorMessage;
       }
       
+      console.error('Sign in error:', authError);
       Alert.alert('Sign In Error', errorMessage);
       throw error;
     } finally {
@@ -100,14 +101,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   ): Promise<void> => {
     try {
       setLoading(true);
-      // For now with mock Firebase, just simulate user creation
-      const result = await firebaseAuth.createUserWithEmailAndPassword();
+      console.log('Attempting to create account for:', email);
+      
+      // Create the user account in Firebase Auth
+      const result = await firebaseAuth.createUserWithEmailAndPassword(email, password);
       const newUser = result.user;
       
       if (newUser) {
-        await createUserProfile(newUser, additionalData);
+        console.log('User account created successfully:', newUser.uid);
+        
+        // Try to create user profile in Realtime Database
+        try {
+          await createUserProfile(newUser, additionalData);
+          console.log('✅ User profile created in Realtime Database');
+        } catch (databaseError) {
+          console.error('⚠️ Database error (account still created):', databaseError);
+          // Don't throw - user account was created successfully
+          Alert.alert(
+            'Account Created', 
+            'Your account was created but profile setup failed. You can still sign in.'
+          );
+        }
       }
-      console.log('Mock sign up for:', email);
     } catch (error) {
       const authError = error as AuthError;
       let errorMessage = 'An error occurred during sign up.';
@@ -125,10 +140,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         case 'auth/operation-not-allowed':
           errorMessage = 'Email/password accounts are not enabled.';
           break;
+        case 'database/unavailable':
+          errorMessage = 'Database is temporarily unavailable. Please check your internet connection and try again.';
+          break;
+        case 'database/permission-denied':
+          errorMessage = 'Database access denied. Please contact support.';
+          break;
         default:
           errorMessage = authError.message || errorMessage;
       }
       
+      console.error('Sign up error:', authError);
       Alert.alert('Sign Up Error', errorMessage);
       throw error;
     } finally {
@@ -151,9 +173,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const resetPassword = async (email: string): Promise<void> => {
     try {
-      // For now with mock Firebase, just simulate password reset
-      await firebaseAuth.sendPasswordResetEmail();
-      console.log('Mock password reset for:', email);
+      console.log('Sending password reset email to:', email);
+      await firebaseAuth.sendPasswordResetEmail(email);
+      console.log('Password reset email sent successfully');
       Alert.alert(
         'Password Reset',
         'A password reset email has been sent to your email address.'
@@ -173,6 +195,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           errorMessage = authError.message || errorMessage;
       }
       
+      console.error('Password reset error:', authError);
       Alert.alert('Password Reset Error', errorMessage);
       throw error;
     }
@@ -189,7 +212,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       // Update local state
       if (userProfile) {
-        setUserProfile({ ...userProfile, ...updates, updatedAt: new Date() });
+        setUserProfile({ ...userProfile, ...updates, updatedAt: new Date().toISOString() });
       }
     } catch (error) {
       console.error('Error updating profile:', error);

@@ -8,8 +8,20 @@ import {
   ViewStyle,
   TextInputProps,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '../../theme';
+
+// Icon mapping for text-based icons
+const iconMap: Record<string, string> = {
+  email: '📧',
+  lock: '🔒',
+  person: '👤',
+  visibility: '👁',
+  'visibility-off': '🚫',
+};
+
+const getIconText = (iconName: string): string => {
+  return iconMap[iconName] || '?';
+};
 
 interface InputProps extends TextInputProps {
   label?: string;
@@ -181,12 +193,17 @@ export const Input = forwardRef<TextInput, InputProps>(({
       
       <View style={inputContainerStyles}>
         {leftIcon && (
-          <Icon
-            name={leftIcon}
-            size={20}
-            color={isFocused ? theme.colors.primary[500] : theme.colors.text.secondary}
-            style={styles.leftIcon}
-          />
+          <Text
+            style={[
+              styles.leftIcon,
+              {
+                color: isFocused ? theme.colors.primary[500] : theme.colors.text.secondary,
+                fontSize: 20,
+              }
+            ]}
+          >
+            {getIconText(leftIcon)}
+          </Text>
         )}
         
         <TextInput
@@ -204,11 +221,14 @@ export const Input = forwardRef<TextInput, InputProps>(({
             style={styles.rightIcon}
             disabled={!onRightIconPress}
           >
-            <Icon
-              name={rightIcon}
-              size={20}
-              color={isFocused ? theme.colors.primary[500] : theme.colors.text.secondary}
-            />
+            <Text
+              style={{
+                color: isFocused ? theme.colors.primary[500] : theme.colors.text.secondary,
+                fontSize: 20,
+              }}
+            >
+              {getIconText(rightIcon)}
+            </Text>
           </TouchableOpacity>
         )}
       </View>

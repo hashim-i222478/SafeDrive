@@ -10,13 +10,12 @@ import {
   Alert,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '../../theme';
 import { Button, Input, LoadingSpinner } from '../../components/ui';
 import { useAuth } from '../../context/AuthContext';
 
 interface LoginScreenProps {
-  navigation?: any;
+  navigation: any;
 }
 
 export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
@@ -71,11 +70,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   };
 
   const handleSignUp = () => {
-    if (navigation?.navigate) {
-      navigation.navigate('SignUp');
-    } else {
-      Alert.alert('Coming Soon', 'Sign up feature will be available soon.');
-    }
+    navigation.navigate('SignUp');
   };
 
   const updateField = (field: keyof typeof formData, value: string) => {
@@ -107,7 +102,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
           {/* Header */}
           <View style={styles.header}>
             <View style={[styles.logoContainer, { backgroundColor: theme.colors.primary[500] }]}>
-              <Icon name="remove-red-eye" size={40} color={theme.colors.text.inverse} />
+              <Text style={[styles.logoIcon, { color: theme.colors.text.inverse }]}>👁</Text>
             </View>
             <Text style={[styles.title, theme.typography.heading.h1, { color: theme.colors.text.primary }]}>
               SafeDrive
@@ -189,19 +184,19 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
           {/* Features */}
           <View style={styles.features}>
             <View style={styles.feature}>
-              <Icon name="security" size={24} color={theme.colors.primary[500]} />
+              <Text style={[styles.featureIcon, { color: theme.colors.primary[500] }]}>🔒</Text>
               <Text style={[styles.featureText, theme.typography.caption.large, { color: theme.colors.text.secondary }]}>
                 Secure Authentication
               </Text>
             </View>
             <View style={styles.feature}>
-              <Icon name="cloud-sync" size={24} color={theme.colors.primary[500]} />
+              <Text style={[styles.featureIcon, { color: theme.colors.primary[500] }]}>☁️</Text>
               <Text style={[styles.featureText, theme.typography.caption.large, { color: theme.colors.text.secondary }]}>
                 Cloud Sync
               </Text>
             </View>
             <View style={styles.feature}>
-              <Icon name="analytics" size={24} color={theme.colors.primary[500]} />
+              <Text style={[styles.featureIcon, { color: theme.colors.primary[500] }]}>📊</Text>
               <Text style={[styles.featureText, theme.typography.caption.large, { color: theme.colors.text.secondary }]}>
                 Driving Analytics
               </Text>
@@ -282,6 +277,14 @@ const styles = StyleSheet.create({
   },
   featureText: {
     marginTop: 8,
+    textAlign: 'center',
+  },
+  logoIcon: {
+    fontSize: 40,
+    textAlign: 'center',
+  },
+  featureIcon: {
+    fontSize: 24,
     textAlign: 'center',
   },
 });

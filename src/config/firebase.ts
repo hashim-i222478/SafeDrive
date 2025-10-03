@@ -1,46 +1,21 @@
-// Temporarily disable Firebase to fix TurboModule errors
-// We'll re-enable after basic app is working
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import database, { FirebaseDatabaseTypes } from '@react-native-firebase/database';
 
-// Mock Firebase services for now
-export const firebaseAuth = {
-  onAuthStateChanged: (callback: any) => {
-    // Mock - always return no user for now
-    callback(null);
-    return () => {};
-  },
-  signInWithEmailAndPassword: async () => Promise.resolve({ user: null }),
-  createUserWithEmailAndPassword: async () => Promise.resolve({ user: null }),
-  signOut: async () => Promise.resolve(),
-  sendPasswordResetEmail: async () => Promise.resolve(),
-};
+// Firebase services
+export const firebaseAuth = auth();
+export const firebaseDatabase = database();
 
-export const firebaseFirestore = {
-  collection: () => ({
-    doc: () => ({
-      get: async () => ({ exists: false, data: () => null }),
-      set: async () => Promise.resolve(),
-      update: async () => Promise.resolve(),
-    }),
-  }),
-};
-
-// Export types (mocked for now)
-export type User = {
-  uid: string;
-  email: string | null;
-  displayName: string | null;
-  photoURL: string | null;
-} | null;
-
+// Export Firebase types
+export type User = FirebaseAuthTypes.User | null;
 export type AuthError = {
   code: string;
   message: string;
 };
 
-export type DocumentSnapshot = any;
-export type QuerySnapshot = any;
+export type DatabaseReference = FirebaseDatabaseTypes.Reference;
+export type DataSnapshot = FirebaseDatabaseTypes.DataSnapshot;
 
-// User profile interface for Firestore
+// User profile interface for Realtime Database
 export interface UserProfile {
   uid: string;
   email: string;
@@ -49,8 +24,8 @@ export interface UserProfile {
   lastName?: string;
   phoneNumber?: string;
   photoURL?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string; // ISO string for Realtime Database
+  updatedAt: string;
   // Drowsiness detection specific fields
   drivingPreferences?: {
     alertSensitivity: 'low' | 'medium' | 'high';
@@ -62,7 +37,7 @@ export interface UserProfile {
     totalTrips: number;
     totalDrivingTime: number; // in minutes
     drowsinessIncidents: number;
-    lastTripDate?: Date;
+    lastTripDate?: string; // ISO string
   };
 }
 
@@ -70,12 +45,12 @@ export interface UserProfile {
 export const createUserProfile = async (user: User, additionalData?: Partial<UserProfile>): Promise<void> => {
   if (!user) return;
   
-  const userRef = firebaseFirestore.collection('users').doc(user.uid);
-  const snapshot = await userRef.get();
+  const userRef = firebaseDatabase.ref(`users/${user.uid}`);
+  const snapshot = await userRef.once('value');
   
-  if (!snapshot.exists) {
+  if (!snapshot.exists()) {
     const { email, displayName, photoURL } = user;
-    const createdAt = new Date();
+    const createdAt = new Date().toISOString();
     
     const defaultProfile: UserProfile = {
       uid: user.uid,
@@ -100,8 +75,9 @@ export const createUserProfile = async (user: User, additionalData?: Partial<Use
     
     try {
       await userRef.set(defaultProfile);
+      console.log('✅ User profile created successfully in Realtime Database');
     } catch (error) {
-      console.error('Error creating user profile:', error);
+      console.error('❌ Error creating user profile:', error);
       throw error;
     }
   }
@@ -109,28 +85,30 @@ export const createUserProfile = async (user: User, additionalData?: Partial<Use
 
 export const getUserProfile = async (uid: string): Promise<UserProfile | null> => {
   try {
-    const userRef = firebaseFirestore.collection('users').doc(uid);
-    const snapshot = await userRef.get();
+    const userRef = firebaseDatabase.ref(`users/${uid}`);
+    const snapshot = await userRef.once('value');
     
-    if (snapshot.exists) {
-      return snapshot.data() as UserProfile;
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      return data as UserProfile;
     }
     return null;
   } catch (error) {
-    console.error('Error fetching user profile:', error);
+    console.error('❌ Error fetching user profile:', error);
     throw error;
   }
 };
 
 export const updateUserProfile = async (uid: string, updates: Partial<UserProfile>): Promise<void> => {
   try {
-    const userRef = firebaseFirestore.collection('users').doc(uid);
+    const userRef = firebaseDatabase.ref(`users/${uid}`);
     await userRef.update({
       ...updates,
-      updatedAt: new Date(),
+      updatedAt: new Date().toISOString(),
     });
+    console.log('✅ User profile updated successfully');
   } catch (error) {
-    console.error('Error updating user profile:', error);
+    console.error('❌ Error updating user profile:', error);
     throw error;
   }
 };
