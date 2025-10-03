@@ -1,8 +1,220 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# SafeDrive - Drowsiness Detection App
 
-# Getting Started
+A React Native application with Firebase authentication for drowsiness detection while driving.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Prerequisites
+
+Before running this project, make sure you have:
+
+### Development Environment
+- **Node.js** (v18 or higher)
+- **pnpm** package manager (`npm install -g pnpm`)
+- **Android Studio** with Android SDK
+- **Java JDK** (v17 or higher)
+- **React Native CLI** (`npm install -g @react-native-community/cli`)
+
+### Mobile Development Setup
+- **Android Emulator** or physical Android device
+- For iOS: **Xcode** and iOS Simulator (macOS only)
+
+> **Note**: Complete the [React Native Environment Setup](https://reactnative.dev/docs/environment-setup) guide for your platform.
+
+## Firebase Setup
+
+This project uses Firebase for authentication and Realtime Database. You'll need to set up your own Firebase project:
+
+### 1. Create Firebase Project
+1. Go to [Firebase Console](https://console.firebase.google.com/)
+2. Create a new project
+3. Enable **Authentication** > **Email/Password** sign-in method
+4. Enable **Realtime Database** in test mode
+
+### 2. Configure Android App
+1. Add an Android app to your Firebase project
+2. Package name: `com.safedrive`
+3. Download `google-services.json`
+4. Place it in `android/app/google-services.json`
+
+### 3. Configure iOS App (Optional)
+1. Add an iOS app to your Firebase project
+2. Bundle ID: `com.safedrive`
+3. Download `GoogleService-Info.plist`
+4. Place it in `ios/SAFEDRIVE/GoogleService-Info.plist`
+
+## Installation & Setup
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/hashim-i222478/SafeDrive.git
+cd SAFEDRIVE
+```
+
+### 2. Install Dependencies
+```bash
+# Install Node.js dependencies
+pnpm install
+
+# Install iOS dependencies (macOS only)
+cd ios && bundle install && bundle exec pod install && cd ..
+```
+
+### 3. Firebase Configuration
+- Replace `android/app/google-services.json` with your Firebase config
+- Replace `ios/SAFEDRIVE/GoogleService-Info.plist` with your Firebase config (iOS)
+
+### 4. Start Metro Server
+```bash
+pnpm start
+```
+
+### 5. Run the App
+
+#### Android
+```bash
+# Using pnpm
+pnpm run android
+
+# OR using React Native CLI
+npx react-native run-android
+```
+
+#### iOS (macOS only)
+```bash
+# Using pnpm
+pnpm run ios
+
+# OR using React Native CLI
+npx react-native run-ios
+```
+
+## Project Structure
+
+```
+SAFEDRIVE/
+├── src/
+│   ├── components/ui/     # Reusable UI components
+│   ├── config/           # Firebase configuration
+│   ├── context/          # React Context (Auth)
+│   ├── navigation/       # Navigation setup
+│   ├── screens/          # App screens
+│   └── theme/           # Design tokens
+├── android/             # Android-specific code
+├── ios/                # iOS-specific code
+└── __tests__/          # Test files
+```
+
+## Features
+
+- 🔐 **Firebase Authentication** (Email/Password)
+- 📱 **Custom Navigation System**
+- 🎨 **Custom UI Components**
+- 💾 **Realtime Database Integration**
+- 🚗 **Drowsiness Detection** (Coming Soon)
+
+## Scripts
+
+```bash
+# Start Metro server
+pnpm start
+
+# Run on Android
+pnpm run android
+
+# Run on iOS
+pnpm run ios
+
+# Run tests
+pnpm test
+
+# Type checking
+pnpm run tsc
+
+# Linting
+pnpm run lint
+```
+
+## Troubleshooting
+
+### Common Issues
+
+#### 1. Metro Server Issues
+```bash
+# Clear Metro cache
+npx react-native start --reset-cache
+```
+
+#### 2. Android Build Issues
+```bash
+# Clean Android build
+cd android && ./gradlew clean && cd ..
+npx react-native run-android
+```
+
+#### 3. iOS Build Issues (macOS)
+```bash
+# Clean iOS build
+cd ios && xcodebuild clean && cd ..
+npx react-native run-ios
+```
+
+#### 4. Firebase Authentication Issues
+- Ensure `google-services.json` is in `android/app/`
+- Verify Firebase project has Email/Password auth enabled
+- Check internet connectivity
+
+#### 5. Database Permission Errors
+- Ensure Realtime Database is in **test mode**
+- Rules should allow read/write for testing:
+```json
+{
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
+```
+
+## Development
+
+### Adding New Features
+1. Create feature branch: `git checkout -b feature/new-feature`
+2. Make changes and test
+3. Commit: `git commit -m "Add new feature"`
+4. Push: `git push origin feature/new-feature`
+5. Create Pull Request
+
+### Firebase Security Rules (Production)
+For production, update Realtime Database rules:
+```json
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid"
+      }
+    }
+  }
+}
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Contact
+
+- **Developer**: Hashim
+- **GitHub**: [@hashim-i222478](https://github.com/hashim-i222478)
+- **Repository**: [SafeDrive](https://github.com/hashim-i222478/SafeDrive)
 
 ## Step 1: Start Metro
 

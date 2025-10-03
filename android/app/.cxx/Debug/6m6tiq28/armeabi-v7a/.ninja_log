@@ -1,0 +1,27 @@
+# ninja log v5
+42	21442	7812061554336129	CMakeFiles/appmodules.dir/C_/University/FYP/SD/SAFEDRIVE/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	a3aeaa0b3863cf57
+2	64	0	C:/University/FYP/SD/SAFEDRIVE/android/app/.cxx/Debug/6m6tiq28/armeabi-v7a/CMakeFiles/cmake.verify_globs	435b906f8fbb83b3
+49	18422	7812061522712811	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/2498f8edcb3a85d54028d0c9dc98c2d1/renderer/components/safeareacontext/ComponentDescriptors.cpp.o	81177961c080f150
+115	12576	7812061462505906	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/490bdd4b4b56aed2a90a281430b912db/jni/react/renderer/components/safeareacontext/States.cpp.o	ef8ebbd47090ef00
+86	14065	7812061471836245	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/8681323a50f8d8e328b916379b7de424/react/renderer/components/safeareacontext/EventEmitters.cpp.o	f4f90409e5438202
+58	16474	7812061501355785	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/f42ed64a0a586083604a9d8a0255d3a0/renderer/components/safeareacontext/RNCSafeAreaViewState.cpp.o	c17bf79075811410
+126	15704	7812061494357350	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/e695d824cb81c0ba6d8ef040ae93f0fa/generated/source/codegen/jni/safeareacontext-generated.cpp.o	981407a8a9aa57e8
+77	17069	7812061509119019	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/490bdd4b4b56aed2a90a281430b912db/jni/react/renderer/components/safeareacontext/Props.cpp.o	29d54bc74532dfe8
+68	19867	7812061538833066	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/e44e593f8049105b855aa86b7f6cd5fb/components/safeareacontext/RNCSafeAreaViewShadowNode.cpp.o	a1a69d6c7a884eef
+105	15165	7812061487796179	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/62a26490532f6ceda2e924fb0fab25de/components/safeareacontext/safeareacontextJSI-generated.cpp.o	3f4c1838dc864cdb
+96	18982	7812061529296544	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/8681323a50f8d8e328b916379b7de424/react/renderer/components/safeareacontext/ShadowNodes.cpp.o	7ab9160e15bc84ec
+19869	20232	7812061545910746	C:/University/FYP/SD/SAFEDRIVE/android/app/build/intermediates/cxx/Debug/6m6tiq28/obj/armeabi-v7a/libreact_codegen_safeareacontext.so	8b115fa99c383ec6
+36	17668	7812061513358135	CMakeFiles/appmodules.dir/OnLoad.cpp.o	a073d656fd9c87c7
+154	15230	7812061484494250	RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/react/renderer/components/RNVectorIconsSpec/Props.cpp.o	9e2a8067444901f2
+14067	23631	7812061578205636	RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/react/renderer/components/RNVectorIconsSpec/RNVectorIconsSpecJSI-generated.cpp.o	676a8b4e533adcc8
+15166	22726	7812061569400012	RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/react/renderer/components/RNVectorIconsSpec/States.cpp.o	3f08f9c42113fd5b
+15095	23300	7812061574863016	RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/react/renderer/components/RNVectorIconsSpec/EventEmitters.cpp.o	e7e4059be5814e52
+144	15094	7812061486762093	RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/RNVectorIconsSpec-generated.cpp.o	5a6657f27a4a953c
+12580	24003	7812061582016197	RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/react/renderer/components/RNVectorIconsSpec/ShadowNodes.cpp.o	4d721e6392470a4e
+135	16441	7812061498900738	RNVectorIconsSpec_autolinked_build/CMakeFiles/react_codegen_RNVectorIconsSpec.dir/react/renderer/components/RNVectorIconsSpec/ComponentDescriptors.cpp.o	cc4c074e7e302aab
+24004	24178	7812061585579444	C:/University/FYP/SD/SAFEDRIVE/android/app/build/intermediates/cxx/Debug/6m6tiq28/obj/armeabi-v7a/libappmodules.so	b85ebcb470fa955
+65	1014	7812068445727715	build.ninja	1aaf67a2f7124435
+2	39	0	C:/University/FYP/SD/SAFEDRIVE/android/app/.cxx/Debug/6m6tiq28/armeabi-v7a/CMakeFiles/cmake.verify_globs	435b906f8fbb83b3
+30	348	7812068451618111	CMakeFiles/appmodules.dir/OnLoad.cpp.o	a073d656fd9c87c7
+22	377	7812068451903055	CMakeFiles/appmodules.dir/C_/University/FYP/SD/SAFEDRIVE/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	a3aeaa0b3863cf57
+378	623	7812068454173291	C:/University/FYP/SD/SAFEDRIVE/android/app/build/intermediates/cxx/Debug/6m6tiq28/obj/armeabi-v7a/libappmodules.so	b85ebcb470fa955
